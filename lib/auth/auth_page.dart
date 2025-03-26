@@ -10,7 +10,6 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  
   // Show login page
   bool showLoginPage = true;
 
