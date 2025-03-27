@@ -30,10 +30,16 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future singUp() async {
-    if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+    const allowedDomain = "@ite.edu.mx";
+    if (!_emailController.text.trim().endsWith(allowedDomain)) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content:
+                Text('Only emails with "$allowedDomain" domain are allowed'),
+          );
+        },
       );
     }
   }
@@ -88,7 +94,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(12),
-
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColors.secondary),
@@ -111,7 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(12),
-
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColors.secondary),
@@ -162,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color:AppColors.secondary),
+                        borderSide: BorderSide(color: AppColors.secondary),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       hintText: 'Confirmar Contraseña',
@@ -171,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
 
                 //Sing-in Button
 
@@ -180,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: GestureDetector(
                     onTap: singUp,
                     child: Container(
-                      padding: EdgeInsets.all(18),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: AppColors.primary,
                         borderRadius: BorderRadius.circular(12),
@@ -189,7 +193,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Text(
                           'Sign up',
                           style: TextStyle(
-                            color: AppColors.secondary,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
@@ -214,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     GestureDetector(
                       onTap: widget.showLoginPage,
                       child: Text(
-                        ' Login Now',
+                        ' Iniciar Sesion',
                         style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.bold,

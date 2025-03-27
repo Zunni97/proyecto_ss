@@ -41,9 +41,12 @@ class _LoginPageState extends State<Loginpage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                /* Icon(Icons.school_rounded, size: 100 //icono del gorrito,
-                    ),
-                SizedBox(height: 75), */
+                Image.asset(
+                  'lib/images/servitec.png',
+                  width: 300,
+                  height: 280,
+                ),
+                //SizedBox(height: 10),
                 Text(
                   'Iniciar sesion',
                   style: TextStyle(
@@ -51,15 +54,15 @@ class _LoginPageState extends State<Loginpage> {
                     fontSize: 40,
                   ),
                 ),
-                SizedBox(height: 100),
+                SizedBox(height: 30),
 
                 // Email TextField
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: CustomLoginForm(
                         text: 'Correo electronico*',
                         controller: _emailController)),
-                SizedBox(height: 50),
+                SizedBox(height: 40),
 
                 // Password TextField
                 Padding(
@@ -100,7 +103,7 @@ class _LoginPageState extends State<Loginpage> {
                   ),
                 ),
 
-                SizedBox(height: 90),
+                SizedBox(height: 60),
 
                 //Sing-in Button
                 Padding(
