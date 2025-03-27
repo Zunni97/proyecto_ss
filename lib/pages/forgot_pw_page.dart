@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ss2025/colors.dart';
+import 'package:ss2025/widgets/custom_login_form.dart';
 
 class ForgotPasswordpage extends StatefulWidget {
   const ForgotPasswordpage({super.key});
@@ -25,7 +27,10 @@ class _ForgotPasswordpageState extends State<ForgotPasswordpage> {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text('Please enter a valid email address.'),
+              content: Text(
+                'Por favor ingresa un correo electronico valido.',
+                textAlign: TextAlign.center,
+              ),
             );
           },
         );
@@ -37,7 +42,9 @@ class _ForgotPasswordpageState extends State<ForgotPasswordpage> {
         context: context,
         builder: (context) {
           return const AlertDialog(
-            content: Text('Password reset link sent! Check your email.'),
+            content: Text(
+                'Recibirás las intrucciones para restablecer tu contraseña en el siguiente correo',
+                textAlign: TextAlign.center),
           );
         },
       );
@@ -57,47 +64,55 @@ class _ForgotPasswordpageState extends State<ForgotPasswordpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: AppColors.background,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: const Text(
-              'Enter your Email and we will send you a password reset link',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 100,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                hintText: 'Email',
-                fillColor: Colors.grey,
-                filled: true,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: const Text(
+                'Restablece \n tu contraseña',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          MaterialButton(
-            onPressed: passwordReset,
-            color: Colors.deepPurple,
-            child: const Text('Reset Password'),
-          ),
-        ],
+            SizedBox(
+              height: 60,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: CustomLoginForm(
+                    text: 'Correo electronico*', controller: _emailController)),
+            const SizedBox(height: 100),
+
+            //reset-password button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: MaterialButton(
+                  onPressed: passwordReset,
+                  color: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                    child: Text(
+                      'Cambiar Contraseña',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

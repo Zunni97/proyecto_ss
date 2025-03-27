@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ss2025/colors.dart';
 
 class CustomLoginForm extends StatelessWidget {
   final String text;
@@ -28,7 +29,7 @@ class CustomLoginForm extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(8)),
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.yellow),
+                    borderSide: BorderSide(color: AppColors.primary),
                     borderRadius: BorderRadius.circular(8)),
                 fillColor: Colors.white,
                 filled: true),
