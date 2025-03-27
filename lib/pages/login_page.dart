@@ -52,6 +52,7 @@ class _LoginPageState extends State<Loginpage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
+                    color: AppColors.primary,
                   ),
                 ),
                 SizedBox(height: 30),
@@ -61,7 +62,9 @@ class _LoginPageState extends State<Loginpage> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: CustomLoginForm(
                         text: 'Correo electronico*',
-                        controller: _emailController)),
+                        controller: _emailController,
+                        )),
+                        
                 SizedBox(height: 40),
 
                 // Password TextField

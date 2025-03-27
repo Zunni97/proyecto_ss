@@ -25,17 +25,22 @@ class CustomLoginForm extends StatelessWidget {
             obscureText: obscureText,
             controller: controller,
             decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(8)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primary),
-                    borderRadius: BorderRadius.circular(8)),
-                fillColor: Colors.white,
-                filled: true),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                      ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.secondary),
+                borderRadius: BorderRadius.circular(12),
+                      ),
+              fillColor: Colors.white,
+              filled: true,
+                    ),
           ),
         ),
       ],
     );
   }
 }
+
+

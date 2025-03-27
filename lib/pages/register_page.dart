@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (context) {
           return const AlertDialog(
             content:
-                Text('Only emails with "$allowedDomain" domain are allowed'),
+                Text('Ups solo se permiten correos "$allowedDomain" con este dominio'),
           );
         },
       );
@@ -65,10 +65,10 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Image.asset(
                   'lib/images/servitec.png',
-                  width: 200,
-                  height: 200,
+                  width: 300,
+                  height: 250,
                 ),
-                SizedBox(height: 20),
+                //SizedBox(height: 10),
                 Text(
                   'Crear Cuenta',
                   style: TextStyle(
