@@ -54,7 +54,8 @@ class _ForgotPasswordpageState extends State<ForgotPasswordpage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text(e.message.toString()),
+            content: Text('Por favor ingresa un correo electronico valido.', 
+                textAlign: TextAlign.center),
           );
         },
       );
@@ -81,7 +82,10 @@ class _ForgotPasswordpageState extends State<ForgotPasswordpage> {
               child: const Text(
                 'Restablece \n tu contraseña',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 40, 
+                  fontWeight: FontWeight.bold, 
+                    color: AppColors.primary),
               ),
             ),
             SizedBox(
