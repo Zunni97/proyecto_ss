@@ -339,29 +339,44 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void navigateToLoginPage() {
-    Future.delayed(Duration.zero, () {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Loginpage(
-              showRegisterPage: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterPage(
-                      showLoginPage: navigateToLoginPage,
-                    ),
-                  ),
-                );
-              },
+void navigateToLoginPage(BuildContext context) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Loginpage(
+        showRegisterPage: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegisterPage(
+                showLoginPage: () {
+                  Navigator.pop(context); // Regresa al LoginPage
+                },
+              ),
             ),
-          ),
-        );
-      }
-    });
-  }
+          );
+        },
+      ),
+    ),
+  );
+}
+
+
+void navigateToRegisterPage(BuildContext context) {
+  if (!mounted) return;
+
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => RegisterPage(
+        showLoginPage: () {
+          navigateToLoginPage(context);
+        },
+      ),
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -375,7 +390,7 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.logout),
             onPressed: () {
               FirebaseAuth.instance.signOut();
-              navigateToLoginPage();
+              navigateToLoginPage(context);
             },
           ),
         ],

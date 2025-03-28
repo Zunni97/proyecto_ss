@@ -47,6 +47,16 @@ class _RegisterPageState extends State<RegisterPage> {
       password: _passwordController.text.trim(),
     );
     }
+    else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('Este correo ya esta registrado'),
+          );
+        },
+      );
+    }
   }
 
   bool passwordConfirmed() {
