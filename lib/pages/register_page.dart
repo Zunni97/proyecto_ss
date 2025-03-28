@@ -52,6 +52,14 @@ class _RegisterPageState extends State<RegisterPage> {
     _confirmPasswordController.text.trim()) {
       return true;
     } else {
+        showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('Las contraseñas no coinciden'),
+          );
+        },
+      );
       return false;
     }
   }
