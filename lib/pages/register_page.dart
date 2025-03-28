@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text('Only emails with "$allowedDomain" domain are allowed'),
+              content: Text('Ups solo se permiten correos con el dominio"$allowedDomain" '),
             );
           },
         );
