@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ss2025/colors.dart';
 import 'package:ss2025/pages/forgot_pw_page.dart';
 import 'package:ss2025/widgets/custom_login_form.dart';
+import 'package:ss2025/colors.dart';
 
 class Loginpage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -13,15 +13,16 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<Loginpage> {
+  
   //text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future singIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
+      email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
-    );
+      );
   }
 
   @override

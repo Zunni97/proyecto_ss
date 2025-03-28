@@ -22,7 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -32,21 +31,27 @@ class _RegisterPageState extends State<RegisterPage> {
   Future singUp() async {
     const allowedDomain = "@ite.edu.mx";
     if (!_emailController.text.trim().endsWith(allowedDomain)) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            content:
-                Text('Ups solo se permiten correos "$allowedDomain" con este dominio'),
-          );
-        },
-      );
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text('Only emails with "$allowedDomain" domain are allowed'),
+            );
+          },
+        );
+    } 
+
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(),
+    );
     }
   }
 
   bool passwordConfirmed() {
-    if (_passwordController.text.trim() ==
-        _confirmPasswordController.text.trim()) {
+    if(_passwordController.text.trim() == 
+    _confirmPasswordController.text.trim()) {
       return true;
     } else {
       return false;
