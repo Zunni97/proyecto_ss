@@ -1,337 +1,102 @@
+import 'dart:collection';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ss2025/colors.dart';
 import 'package:ss2025/widgets/bottom_custom_navigation_bar.dart';
 import 'package:ss2025/pages/register_page.dart';
 import 'package:ss2025/pages/login_page.dart';
+import 'package:ss2025/pages/forgot_pw_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+class HomeScreen extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final user = FirebaseAuth.instance.currentUser!;
+class _HomeScreenState extends State<HomeScreen> {
+  int currentTabIndex = 0;
 
-  int currentTabIndex = 0; // Track the current tab index
-  List<Widget> currentCards = []; // List to hold the current cards
-
-  @override
-  void initState() {
-    super.initState();
-    currentCards = getCardsForTab(
-        currentTabIndex); // Initialize with the first tab's cards
+  void onTabChanged(int index) {
+    setState(() {
+      currentTabIndex = index;
+    });
   }
 
   List<Widget> getCardsForTab(int index) {
     switch (index) {
       case 0:
         return [
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: INTELECT',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido: Ingeneria en Sistemas / Gestion empresarial'),
-                    Text('Contacto: Isaac Montalvo'),
-                    Text('Contacto: 646-120-5605'),
-                    Text('Descripción: Ofrece a la venta productos de control y'
-                        ' automatización eléctricos, así como la integración eléctrica '
-                        ' de tableros de control según las necesidades del cliente. '),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: INTELECT",
+            description:
+                "Ofrece productos de control y automatización eléctricos, así como la integración eléctrica de tableros de control.",
+            icon: Icons.business_center,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Plenimex',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido: Lic. Administración / Ing. Gestión Empresarial'),
-                    Text('Contacto: michelle.toscano@3day.com'),
-                    Text('Descripción: Somos una empresa dedicada a la fabricación de persianas'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Plenimex",
+            description:
+                "Fabricación de persianas, dirigida a licenciados en administración y áreas relacionadas.",
+            icon: Icons.build,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Schlage de Mexico',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Carrera que va dirigido: Ing. Mecatronica / Ing. Electromecanica'
-                    'Ing. Industrial / Ing. Gestión Empresarial'),
-                    Text('Contacto: osirema.morales@alligion.com'),
-                    Text('Descripción: En Allegion, ayudamos a mantener a la gente segura'
-                    ' y segura donde vive, aprende, trabaja y conecta.'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Schlage de Mexico",
+            description:
+                "Líderes en seguridad para el hogar, oficinas y propiedades comerciales.",
+            icon: Icons.security,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Dallio',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Carrera que va dirigido: Ingeniería en Sistemas'),
-                    Text('Contacto: luis.espinoza@dallio.io'),
-                    Text('Descripción: Enfocados en soluciones digitales optimizadas,'
-                    ' usamos tecnología de vanguardia para simplificar procesos complejos y'
-                    ' transformar experiencias de usuario en viajes eficientes y atractivos.'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Dallio",
+            description:
+                "Soluciones digitales optimizadas en tecnología avanzada.",
+            icon: Icons.computer,
           ),
         ];
       case 1:
         return [
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dependencia: Guarderia del IMSS',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Tipo de programa: Externo'),
-                    Text('Carrera que va dirigido: Ingeneria en Sistemas / Gestion empresarial'),
-                    Text('Contacto: alberto.ovalle@imss.gob.mx'),
-                    Text('Descripción: Conocimiento del proceso administrativo de una empresa'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Dependencia: Guardería del IMSS",
+            description:
+                "Proceso administrativo de una empresa, dirigido a Ingenierías en sistemas y gestión empresarial.",
+            icon: Icons.apartment,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dependencia: Caracol Museo de Ciencias ',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Tipo de programa: Externo'),
-                    Text('Carrera que va dirigido: Todas las carreras'),
-                    Text('Contacto: paola@caracolbc.org'),
-                    Text('Descripción: Los estudiantes apoyaran como guías educadores de salas de exhibición y'
-                    ' conductores de talleres didácticos que apoyen la atención de visitantes escolares y'
-                    ' público general de Caracol Museo de Ciencias. '),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Dependencia: Caracol Museo de Ciencias",
+            description:
+                "Guías educadores de salas de exhibición y talleres didácticos.",
+            icon: Icons.science,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dependencia: Instituto Tecnologico de Ensenada',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Tipo de programa: Interno'),
-                    Text('Carrera que va dirigido: Ingenieria en Sistemas Computacionales'),
-                    Text('Contacto: escolares@ite.edu.mx'),
-                    Text('Descripción: Generar un sistema de para el control de los documentos del'
-                    ' Departamento de Servicios Escolares, utilizando técnicas de ingeniería de software'
-                    ' para apoyo a nuestra institución. '),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Dependencia: Instituto Tecnológico de Ensenada",
+            description:
+                "Generación de un sistema para el control de documentos escolares.",
+            icon: Icons.school,
           ),
-
         ];
       case 2:
         return [
-         SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Navico',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido: Lic. Administración / Ing. Electronica / Ing. Industrial'),
-                    Text('Contacto: karen.almaguer@navicogroup.com'),
-                    Text('Descripción: El Grupo Navico es única posición para liderar la transformación '
-                    ' de las industrias marinas y móviles y más allá.'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Navico",
+            description:
+                "Líder en la transformación de las industrias marinas, dirigido a Administración e Ingeniería.",
+            icon: Icons.directions_boat,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Crown',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido: Lic. Administración / Ing. Gestión Empresarial'),
-                    Text('Contacto: marcela.cota@crown.com'),
-                    Text('Descripción: Con 200 plantas en 40 países, estamos en una posición única para apoyar a los clientes'
-                    ' en la expansión de los mercados de latas de bebidas en las Américas y el Sudeste Asiático,'
-                    ' así como geografías históricamente fuertes como Europa, Oriente Medio y África del Norte. '),
-                  ],
-                ),
-              ),
-            ),
-          ),SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Clever Tiny Homes',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido:  Ing. Industrial'),
-                    Text('Contacto: michelle.toscano@3day.com'),
-                    Text('Descripción: Somos una empresa dedicada a la fabricación de persianas'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Crown",
+            description:
+                "Posición única para apoyar el crecimiento del mercado de latas de bebidas.",
+            icon: Icons.factory,
           ),
-          SizedBox(height: 2),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Card(
-              color: AppColors.lightBlue,
-              elevation: 5,
-              shadowColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Empresa: Fender Musical Instruments',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(
-                        'Carrera que va dirigido: Ing. Industrial / Ing. Gestión Empresarial'),
-                    Text('Contacto: reclutamiento@fender.com'),
-                    Text('Descripción: Empresa estadounidense de instrumentos musicales que se ha convertido en un icono cultural'),
-                  ],
-                ),
-              ),
-            ),
+          ProgramCard(
+            title: "Empresa: Clever Tiny Homes",
+            description:
+                "Fabricación de casas pequeñas, dirigido a Ingenieros industriales.",
+            icon: Icons.home,
+          ),
+          ProgramCard(
+            title: "Empresa: Fender Musical Instruments",
+            description:
+                "Fabricación de instrumentos musicales, íconos de la cultura musical.",
+            icon: Icons.music_note,
           ),
         ];
       default:
@@ -339,44 +104,42 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-void navigateToLoginPage(BuildContext context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Loginpage(
-        showRegisterPage: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => RegisterPage(
-                showLoginPage: () {
-                  Navigator.pop(context); // Regresa al LoginPage
-                },
+  void navigateToLoginPage(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginPage(
+          showRegisterPage: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RegisterPage(
+                  showLoginPage: () {
+                    Navigator.pop(context); // Regresa al LoginPage
+                  },
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
+  void navigateToRegisterPage(BuildContext context) {
+    if (!mounted) return;
 
-void navigateToRegisterPage(BuildContext context) {
-  if (!mounted) return;
-
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (context) => RegisterPage(
-        showLoginPage: () {
-          navigateToLoginPage(context);
-        },
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RegisterPage(
+          showLoginPage: () {
+            navigateToLoginPage(context);
+          },
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -397,31 +160,36 @@ void navigateToRegisterPage(BuildContext context) {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ListView(
-              children:
-                  currentCards, // Use the variable to hold the current list of cards
-            ),
-          ),
-          BottomCustomNavigationBar(
-            onTabChange: (index) {
-              setState(() {
-                currentTabIndex = index; // Update the current tab index
-                currentCards = getCardsForTab(
-                    index); // Update the displayed cards based on the selected tab
-              });
-            },
-          ),
+          Expanded(child: ListView(children: getCardsForTab(currentTabIndex))),
+          BottomCustomNavigationBar(onTabChange: onTabChanged),
         ],
       ),
     );
   }
 }
 
-/*
-Log out button
-            SizedBox(height: 30),
-          
-MaterialButton(onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },*/
+class ProgramCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+
+  const ProgramCard({
+    required this.title,
+    required this.description,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      elevation: 4,
+      child: ListTile(
+        leading: Icon(icon, color: AppColors.primary, size: 40),
+        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(description),
+      ),
+    );
+  }
+}

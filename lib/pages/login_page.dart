@@ -3,26 +3,40 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ss2025/pages/forgot_pw_page.dart';
 import 'package:ss2025/widgets/custom_login_form.dart';
 import 'package:ss2025/colors.dart';
+import 'package:ss2025/pages/home_page.dart'; 
+// Asegurar que HomePage esté importado
 
-class Loginpage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
-  const Loginpage({Key? key, required this.showRegisterPage}) : super(key: key);
+  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
 
   @override
-  State<Loginpage> createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<Loginpage> {
-  
-  //text controllers
+class _LoginPageState extends State<LoginPage> {
+  // Text Controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future singIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(), 
-      password: _passwordController.text.trim(),
+  // Método para iniciar sesión
+  Future<void> signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
+      // Navegar a HomePage si el login es exitoso
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } catch (e) {
+      String errorMessage = 'Error al iniciar sesión. Verifica tus datos.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage)),
+      );
+    }
   }
 
   @override
@@ -47,9 +61,8 @@ class _LoginPageState extends State<Loginpage> {
                   width: 300,
                   height: 280,
                 ),
-                //SizedBox(height: 10),
                 Text(
-                  'Iniciar sesion',
+                  'Iniciar sesión',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -60,25 +73,26 @@ class _LoginPageState extends State<Loginpage> {
 
                 // Email TextField
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: CustomLoginForm(
-                        text: 'Correo electronico*',
-                        controller: _emailController,
-                        )),
-                        
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: CustomLoginForm(
+                    text: 'Correo electrónico*',
+                    controller: _emailController,
+                  ),
+                ),
                 SizedBox(height: 40),
 
                 // Password TextField
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: CustomLoginForm(
-                      text: 'Contraeña*',
-                      controller: _passwordController,
-                      obscureText: true,
-                    )),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: CustomLoginForm(
+                    text: 'Contraseña*',
+                    controller: _passwordController,
+                    obscureText: true,
+                  ),
+                ),
                 SizedBox(height: 10),
 
-                //Forgot Password
+                // Forgot Password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
@@ -89,9 +103,7 @@ class _LoginPageState extends State<Loginpage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) {
-                                return ForgotPasswordpage();
-                              },
+                              builder: (context) => ForgotPasswordpage(),
                             ),
                           );
                         },
@@ -106,16 +118,15 @@ class _LoginPageState extends State<Loginpage> {
                     ],
                   ),
                 ),
-
                 SizedBox(height: 60),
 
-                //Sing-in Button
+                // Sign-in Button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
-                    onTap: singIn,
+                    onTap: signIn,
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: AppColors.primary,
                         borderRadius: BorderRadius.circular(12),
@@ -135,29 +146,26 @@ class _LoginPageState extends State<Loginpage> {
                 ),
                 SizedBox(height: 15),
 
-                //Register Button
-
+                // Register Button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '¿Aun no tienes cuenta?',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      '¿Aún no tienes cuenta?',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
                       onTap: widget.showRegisterPage,
                       child: Text(
-                        ' Registrate',
+                        ' Regístrate',
                         style: TextStyle(
                           color: AppColors.secondary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
