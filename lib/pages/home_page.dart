@@ -26,28 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return [
           ProgramCard(
-            title: "Empresa: INTELECT",
+            title: "Empresa: INTELEC",
             description:
                 "Ofrece productos de control y automatización eléctricos, así como la integración eléctrica de tableros de control.",
-            icon: Icons.business_center,
+            imagePath: "lib/images/INTELEC.png",
           ),
           ProgramCard(
             title: "Empresa: Plenimex",
             description:
                 "Fabricación de persianas, dirigida a licenciados en administración y áreas relacionadas.",
-            icon: Icons.build,
+            imagePath: "lib/images/plenimex.png",
           ),
           ProgramCard(
             title: "Empresa: Schlage de Mexico",
             description:
                 "Líderes en seguridad para el hogar, oficinas y propiedades comerciales.",
-            icon: Icons.security,
+            imagePath: "lib/images/schlage.png",
           ),
           ProgramCard(
             title: "Empresa: Dallio",
             description:
                 "Soluciones digitales optimizadas en tecnología avanzada.",
-            icon: Icons.computer,
+            imagePath: "lib/images/dallio.jpg",
           ),
         ];
       case 1:
@@ -56,19 +56,19 @@ class _HomeScreenState extends State<HomeScreen> {
             title: "Dependencia: Guardería del IMSS",
             description:
                 "Proceso administrativo de una empresa, dirigido a Ingenierías en sistemas y gestión empresarial.",
-            icon: Icons.apartment,
+            imagePath: "lib/images/imss.png",
           ),
           ProgramCard(
             title: "Dependencia: Caracol Museo de Ciencias",
             description:
                 "Guías educadores de salas de exhibición y talleres didácticos.",
-            icon: Icons.science,
+            imagePath: "lib/images/museo.jpg",
           ),
           ProgramCard(
             title: "Dependencia: Instituto Tecnológico de Ensenada",
             description:
                 "Generación de un sistema para el control de documentos escolares.",
-            icon: Icons.school,
+            imagePath: "lib/images/ite.jpg",
           ),
         ];
       case 2:
@@ -77,25 +77,25 @@ class _HomeScreenState extends State<HomeScreen> {
             title: "Empresa: Navico",
             description:
                 "Líder en la transformación de las industrias marinas, dirigido a Administración e Ingeniería.",
-            icon: Icons.directions_boat,
+            imagePath: "lib/images/navico.jpg",
           ),
           ProgramCard(
             title: "Empresa: Crown",
             description:
                 "Posición única para apoyar el crecimiento del mercado de latas de bebidas.",
-            icon: Icons.factory,
+            imagePath: "lib/images/crown.jpg",
           ),
           ProgramCard(
             title: "Empresa: Clever Tiny Homes",
             description:
                 "Fabricación de casas pequeñas, dirigido a Ingenieros industriales.",
-            icon: Icons.home,
+            imagePath: "lib/images/clever.jpg",
           ),
           ProgramCard(
             title: "Empresa: Fender Musical Instruments",
             description:
                 "Fabricación de instrumentos musicales, íconos de la cultura musical.",
-            icon: Icons.music_note,
+            imagePath: "lib/images/fender.jpeg",
           ),
         ];
       default:
@@ -170,12 +170,12 @@ class _HomeScreenState extends State<HomeScreen> {
 class ProgramCard extends StatelessWidget {
   final String title;
   final String description;
-  final IconData icon;
+  final String imagePath;
 
   const ProgramCard({
     required this.title,
     required this.description,
-    required this.icon,
+    required this.imagePath,
   });
 
   @override
@@ -185,7 +185,15 @@ class ProgramCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 4,
       child: ListTile(
-        leading: Icon(icon, color: AppColors.primary, size: 40),
+        leading: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+          child: Image.asset(
+            imagePath,
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
+          ),
+        ),
         title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(description),
       ),
