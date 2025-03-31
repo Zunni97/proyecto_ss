@@ -1,11 +1,10 @@
-import 'dart:collection';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ss2025/colors.dart';
 import 'package:ss2025/widgets/bottom_custom_navigation_bar.dart';
 import 'package:ss2025/pages/register_page.dart';
 import 'package:ss2025/pages/login_page.dart';
-import 'package:ss2025/pages/forgot_pw_page.dart';
 import 'package:ss2025/widgets/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
