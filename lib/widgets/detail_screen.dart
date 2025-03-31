@@ -15,9 +15,10 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: AppColors.background, // Personaliza el color si lo deseas
+        backgroundColor: AppColors.secondary, // Personaliza el color si lo deseas
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -28,8 +29,8 @@ class DetailScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(
                 imagePath,
-                width: 200,
-                height: 200,
+                width: 400,
+                height: 280,
                 fit: BoxFit.cover,
               ),
             ),
