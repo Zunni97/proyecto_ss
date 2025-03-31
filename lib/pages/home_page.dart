@@ -57,6 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
             imagePath: "lib/images/dallio.jpg",
             vacante: "Vacantes: \n• Ing. Sistemas"
           ),
+          ProgramCard(
+            title: "Mas Print",
+            description:
+                "Soluciones Multifuncionales de Alto Rendimiento.\nEquipos Comerciales e Industriales para Maximizar tu Productividad."
+                "\n\nPara sistemas: Programacion / Mejora continua / Procedimientos"
+                "\n\n• Informes: linda.coronado@masprint.mx",
+            imagePath: "lib/images/masprint.jpeg",
+            vacante: "Vacantes: \n• Ing. Sistemas\n• Ing. Gestion \n• Ing. Electronica  \n• Ing. Mecatronica \n• Lic. Administracion"
+          ),
         ];
       case 1:
         return [
